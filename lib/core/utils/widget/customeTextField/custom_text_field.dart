@@ -1,0 +1,177 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'app_constants.dart';
+
+
+class CustomTextField extends StatefulWidget {
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
+  final bool? isObscureText;
+  final String? obscure;
+  final Color? filColor;
+  final Color? hinTextColor;
+  final Widget? prefixIcon;
+  final String? labelText;
+  final String? hintText;
+  final double? contentPaddingHorizontal;
+  final double? contentPaddingVertical;
+  final int? maxLine;
+  final double? hinTextSize;
+  final Widget? suffixIcon;
+  final FormFieldValidator? validator;
+  final bool isPassword;
+  final bool? isEmail;
+  final bool? readOnly;
+  final Color? borderColor;
+  final double? borderHeight;
+  final double? borderRadius;
+  final VoidCallback? onTap;
+  final ValueChanged? onChanged;
+  final int? maxLength;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool isvalidation;
+  final FocusNode? focusNode;
+
+
+  const CustomTextField(
+      {super.key,
+        this.contentPaddingHorizontal,
+        this.contentPaddingVertical,
+        this.hintText,
+        this.prefixIcon,
+        this.suffixIcon,
+        this.maxLine,
+        this.validator,
+        this.hinTextColor,
+        this.borderColor,
+        this.isEmail = false,
+        required this.controller,
+        this.keyboardType = TextInputType.text,
+        this.isObscureText = false,
+        this.obscure = '*',
+        this.filColor,
+        this.hinTextSize,
+        this.labelText,
+        this.isPassword = false,
+        this.readOnly = false, this.borderRadius,this.borderHeight, this.onTap, this.onChanged,
+        this.maxLength,
+        this.inputFormatters,
+        this.isvalidation=true,
+        this.focusNode,
+      });
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+
+  OutlineInputBorder customBorder(){
+    return  OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.borderRadius??10),
+        borderSide: BorderSide(
+            color:widget.borderColor??Colors.white,width:widget.borderHeight?? 1
+        )
+    );
+  }
+
+  bool obscureText = true;
+
+  void toggle(){
+    setState(() {
+      obscureText = !obscureText;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if(widget.labelText != null)
+            Text(widget.labelText ?? '',style:TextStyle(
+              fontSize: 14.h,color:Colors.black,fontWeight: FontWeight.w500
+            )),
+
+          TextFormField(
+            onChanged: widget.onChanged,
+            focusNode: widget.focusNode,
+            autofocus: false,
+            onTap:widget. onTap,
+            readOnly: widget.readOnly!,
+            controller: widget.controller,
+            keyboardType: widget.keyboardType,
+            obscuringCharacter: widget.obscure!,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            maxLines: widget.maxLine !=null? widget.maxLine:1,
+            maxLength: widget.maxLength,
+            inputFormatters: widget.inputFormatters,
+            // validator: widget.validator,
+            validator:widget.isvalidation == false
+                ? null
+                :widget.validator ??
+                    (value) {
+                  if (widget.isEmail == false) {
+                    if (value!.isEmpty) {
+                      return "Please ${widget.hintText?.toLowerCase()}";
+                    } else if (widget.isPassword) {
+                      if (value.isEmpty) {
+                        return "Please ${widget.hintText?.toLowerCase()}";
+                      } else if (value.length < 8 || !AppConstants.validatePassword(value)) {
+                        return "Password: 8 characters min, letters & digits \nrequired";
+                      }
+                    }
+                  } else {
+                    bool data = AppConstants.emailValidate.hasMatch(value!);
+                    if (value.isEmpty) {
+                      return "Please ${widget.hintText!.toLowerCase()}";
+                    } else if (!data) {
+                      return "Please check your email!";
+                    }
+                  }
+                  return null;
+                },
+
+            // cursorColor: AppColors.textColor000000,
+            obscureText: widget.isPassword ? obscureText : false,
+            style: TextStyle(color: widget.hinTextColor ?? Colors.black, fontSize: widget.hinTextSize ?? 12),
+            decoration: InputDecoration(
+                counterText: '',
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: widget.contentPaddingHorizontal ?? 20,
+                    vertical: widget.contentPaddingVertical ?? 10),
+                fillColor:widget.filColor != null ?
+                widget.filColor:Colors.white,
+                filled: true,
+                prefixIcon: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 12),
+                  child: widget.prefixIcon,
+                ),
+                suffixIcon: widget.isPassword
+                    ? GestureDetector(
+                    onTap: toggle,
+                    child:Icon(obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined)
+
+                )
+                    : widget.suffixIcon,
+                prefixIconConstraints: BoxConstraints(minHeight: 24, minWidth: 24),
+                hintText: widget.hintText,
+                hintStyle: TextStyle(color: widget.hinTextColor ?? Colors.black, fontSize: widget.hinTextSize ?? 14,fontWeight: FontWeight.w400,),
+                focusedBorder:customBorder(),
+                enabledBorder:customBorder(),
+                // errorBorder: errorBorder(),
+                border:customBorder(),
+                errorStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w400)
+            ),
+
+          ),
+        ],
+      ),
+    );
+  }
+}
