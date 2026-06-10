@@ -48,7 +48,7 @@ class OnboardingController extends GetxController {
 
   void skipOnboarding() {
     print('Skip pressed - going to home');
-    Get.offNamed(AppRoutes.selectRole); // আপনার home route দিন
+    Get.offAllNamed(AppRoutes.selectRole); // আপনার home route দিন
   }
 
   @override

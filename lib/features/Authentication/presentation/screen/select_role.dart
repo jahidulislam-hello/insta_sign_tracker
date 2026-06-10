@@ -62,10 +62,6 @@ class SelectRole extends GetView<AuthController> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Get.back(),
-        ),
         title: Text(
           'Select Your Role',
           style: TextStyle(
@@ -111,7 +107,6 @@ class SelectRole extends GetView<AuthController> {
                 isRoleSelected.value = true;
                 // Controller এ store করছি
                 controller.setSelectedRole(role.title);
-                print('Selected: ${role.title}');
               },
               child: _buildRoleCard(role, isSelected),
             ),
@@ -130,7 +125,6 @@ class SelectRole extends GetView<AuthController> {
     child: ElevatedButton(
     onPressed: isRoleSelected.value
     ? () {
-    print('Going to sign up with role: ${selectedRole.value}');
     Get.toNamed('/signup');
     }
         : null,
@@ -172,7 +166,7 @@ Widget _buildRoleCard(RoleData role, bool isSelected) {
         width: isSelected ? 2 : 1,
       ),
       borderRadius: BorderRadius.circular(12.r),
-      color: isSelected ? Colors.blue.withOpacity(0.05) : Colors.white,
+      color: isSelected ? Colors.blue.withValues(alpha:0.05) : Colors.white,
     ),
     padding: EdgeInsets.all(15.w),
     child: Row(

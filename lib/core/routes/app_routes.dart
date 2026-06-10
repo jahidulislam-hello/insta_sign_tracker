@@ -1,17 +1,18 @@
 abstract class AppRoutes {
   AppRoutes._();
 
+  //onboarding
   static const String splash = '/';
   static const String onboardingScreen = '/onboardingScreen';
   static const String selectRole = '/selectRole';
 
-// ─── Add your routes below ───────────────────────────────────────────────
-// static const String splash   = '/splash';
-// static const String login    = '/login';
-// static const String register = '/register';
-// static const String profile  = '/profile';
-// static const String settings = '/settings';
-// static const String cart     = '/cart';
-// static const String checkout = '/checkout';
-// static const String orderDetail = '/order-detail';
+  //authScreen
+  static const String signup = '/signup';
+  static const String login = '/login';
+  static const String enterEmailScreen = '/enterEmailScreen';
+  static const String otpVerifyScreen = '/otpVerifyScreen';
+  static const String resetPassScreen = '/resetPassScreen';
+
+  //--------------------Real State Agent--------------------
+  static const String homeScreen = '/homeScreen';
 }
