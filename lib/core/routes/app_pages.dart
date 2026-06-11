@@ -7,7 +7,14 @@ import '../../features/Authentication/presentation/screen/select_role.dart';
 import '../../features/Authentication/presentation/screen/sign_up_screen.dart';
 import '../../features/onboarding/presentation/screen/onboarding_screen.dart';
 import '../../features/onboarding/presentation/screen/splash_screen.dart';
+import '../../features/real_state_agent/academy_terms&pricing/presentation/screen/academy_details_screen.dart';
+import '../../features/real_state_agent/academy_terms&pricing/presentation/screen/academy_screen.dart';
+import '../../features/real_state_agent/academy_terms&pricing/presentation/screen/terms_pricing_screen.dart';
 import '../../features/real_state_agent/home/presentation/screen/home_screen.dart';
+import '../../features/real_state_agent/invoice_assistent/presentation/screen/assistant_management_screen.dart';
+import '../../features/real_state_agent/invoice_assistent/presentation/screen/invoice_screen.dart';
+import '../../features/real_state_agent/services/presentation/screen/services_list_screen.dart';
+import '../../features/real_state_agent/settings_profile/presentation/screen/profile_screen.dart';
 import 'app_routes.dart';
 
 abstract class AppPages {
@@ -55,7 +62,34 @@ abstract class AppPages {
       name: AppRoutes.homeScreen,
       page: () => const HomeScreen(),
     ),
-
+    GetPage(
+      name: AppRoutes.invoiceScreen,
+      page: () => const InvoiceScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.assistantManagementScreen,
+      page: () => const AssistantManagementScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.academyScreen,
+      page: () => const AcademyScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.academyDetailsScreen,
+      page: () => const AcademyDetailsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.termsPricingScreen,
+      page: () => const TermsPricingScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.profileScreen,
+      page: () => const ProfileScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.servicesListScreen,
+      page: () => const ServicesListScreen(),
+    ),
 
   ];
 }

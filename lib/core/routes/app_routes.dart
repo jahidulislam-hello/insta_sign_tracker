@@ -15,4 +15,12 @@ abstract class AppRoutes {
 
   //--------------------Real State Agent--------------------
   static const String homeScreen = '/homeScreen';
+  static const String invoiceScreen = '/invoiceScreen';
+  static const String assistantManagementScreen = '/assistantManagementScreen';
+  static const String academyScreen = '/academyScreen';
+  static const String academyDetailsScreen = '/academyDetailsScreen';
+  static const String termsPricingScreen = '/termsPricingScreen';
+  static const String profileScreen = '/profileScreen';
+  static const String servicesListScreen = '/servicesListScreen';
+
 }

@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
-import '../screen/home_screen.dart';
+import '../../data/model/service_item.dart';
 
 class HomeController extends GetxController {
-  // Service items
   late List<ServiceItem> serviceItems;
 
   @override
@@ -15,36 +14,41 @@ class HomeController extends GetxController {
     serviceItems = [
       ServiceItem(
         title: 'Sign Installation',
-        iconPath: 'assets/images/real_state_agent/home/for_sale.png',
+        iconPath: 'asset/images/real_state_agent/home/for_sale.png',
       ),
       ServiceItem(
         title: 'Sign Printing',
-        iconPath: 'assets/images/real_state_agent/home/print.png',
+        iconPath: 'asset/images/real_state_agent/home/print.png',
       ),
       ServiceItem(
         title: 'Sign Removal',
-        iconPath: 'assets/images/real_state_agent/home/remove.png',
+        iconPath: 'asset/images/real_state_agent/home/remove.png',
       ),
       ServiceItem(
         title: 'Sign Change',
-        iconPath: 'assets/images/real_state_agent/home/change.png',
+        iconPath: 'asset/images/real_state_agent/home/change.png',
       ),
       ServiceItem(
         title: 'Media',
-        iconPath: 'assets/images/real_state_agent/home/camera.png',
+        iconPath: 'asset/images/real_state_agent/home/camera.png',
       ),
       ServiceItem(
         title: 'Open House Services',
-        iconPath: 'assets/images/real_state_agent/home/home.png',
+        iconPath: 'asset/images/real_state_agent/home/home.png',
       ),
       ServiceItem(
         title: 'Other Services',
-        iconPath: 'assets/images/real_state_agent/home/services.png',
+        iconPath: 'asset/images/real_state_agent/home/services.png',
       ),
       ServiceItem(
         title: 'Order Directionals',
-        iconPath: 'assets/images/real_state_agent/home/sale_directionals.png',
+        iconPath: 'asset/images/real_state_agent/home/sale_directionals.png',
       ),
     ];
+  }
+
+  void onServiceSelected(String serviceType) {
+    print('Selected: $serviceType');
+    // Later implement navigation
   }
 }
