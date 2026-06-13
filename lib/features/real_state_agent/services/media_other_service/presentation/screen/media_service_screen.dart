@@ -1,0 +1,357 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../../core/utils/widget/customeTextField/custom_text_field.dart';
+import '../controller/media_controller.dart';
+
+class MediaServiceScreen extends GetView<MediaController> {
+  const MediaServiceScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Media Services'),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Address
+                CustomTextField(
+                  controller: controller.addressController,
+                  hintText: 'Lookup Address Or Intersection',
+                  labelText: 'Address *',
+                  borderColor: Colors.black,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter address';
+                    }
+                    return null;
+                  },
+                ),
+
+                // Unit/Apt Number
+                CustomTextField(
+                  controller: controller.unitAptController,
+                  hintText: 'e.g 145789',
+                  labelText: 'Unit / Apt. Number',
+                  keyboardType: TextInputType.number,
+                  borderColor: Colors.black,
+                ),
+
+                // Due Date - Date Picker
+                CustomTextField(
+                  controller: controller.dueDateController,
+                  hintText: 'DD/MM/YYYY',
+                  labelText: 'Due Date',
+                  readOnly: true,
+                  onTap: () {
+                    controller.selectDate(context);
+                  },
+                  suffixIcon: const Icon(Icons.calendar_today_outlined),
+                  borderColor: Colors.black,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please select due date';
+                    }
+                    return null;
+                  },
+                ),
+
+                // Order (ASAP / Rush Order)
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Order',
+                        style: TextStyle(
+                          fontSize: 14.h,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.all(9),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Obx(
+                                    () => ElevatedButton(
+                                  onPressed: () {
+                                    controller.selectedOrder.value = 'asap';
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                    controller.selectedOrder.value == 'asap'
+                                        ? Colors.blue
+                                        : Colors.grey[200],
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.h, horizontal: 10),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'ASAP',
+                                    style: TextStyle(
+                                      color:
+                                      controller.selectedOrder.value ==
+                                          'asap'
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+                            Expanded(
+                              child: Obx(
+                                    () => OutlinedButton(
+                                  onPressed: () {
+                                    controller.selectedOrder.value = 'rush';
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(
+                                      color: controller.selectedOrder.value ==
+                                          'rush'
+                                          ? Colors.red
+                                          : Colors.grey,
+                                    ),
+                                    padding:
+                                    EdgeInsets.symmetric(vertical: 10.h),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Rush Order',
+                                    style: TextStyle(
+                                      color: controller.selectedOrder.value ==
+                                          'rush'
+                                          ? Colors.red
+                                          : Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Select Property Type Dropdown
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Select Property Type *',
+                        style: TextStyle(
+                          fontSize: 14.h,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Obx(
+                            () => DropdownButtonFormField<String>(
+                          initialValue: controller
+                              .selectedPropertyType.value.isEmpty
+                              ? null
+                              : controller.selectedPropertyType.value,
+                          items: controller.propertyTypes
+                              .map((type) => DropdownMenuItem(
+                            value: type,
+                            child: Text(type),
+                          ))
+                              .toList(),
+                          onChanged: (value) {
+                            if (value != null) {
+                              controller.selectedPropertyType.value = value;
+                              controller.formKey.currentState?.validate();
+                            }
+                          },
+                          autovalidateMode:
+                          AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            hintText: 'Select property type',
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 12.h,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.blue),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select property type';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Property Access Method Dropdown
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Property Access Method *',
+                        style: TextStyle(
+                          fontSize: 14.h,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Obx(
+                            () => DropdownButtonFormField<String>(
+                          initialValue: controller
+                              .selectedAccessMethod.value.isEmpty
+                              ? null
+                              : controller.selectedAccessMethod.value,
+                          items: controller.accessMethods
+                              .map((method) => DropdownMenuItem(
+                            value: method,
+                            child: Text(method),
+                          ))
+                              .toList(),
+                          onChanged: (value) {
+                            if (value != null) {
+                              controller.selectedAccessMethod.value = value;
+                              controller.formKey.currentState?.validate();
+                            }
+                          },
+                          autovalidateMode:
+                          AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            hintText: 'Lockbox type',
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 12.h,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.grey),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide:
+                              const BorderSide(color: Colors.blue),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select access method';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Lockbox Code
+                CustomTextField(
+                  controller: controller.lockboxCodeController,
+                  hintText: 'e.g : 12457',
+                  labelText: 'Lockbox Code',
+                  borderColor: Colors.black,
+                ),
+
+                // Notes
+                CustomTextField(
+                  controller: controller.notesController,
+                  hintText: 'Type notes here',
+                  labelText: 'Notes',
+                  maxLine: 3,
+                  borderColor: Colors.black,
+                ),
+
+                SizedBox(height: 20.h),
+
+                // Next Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: controller.goToNextPage,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                    ),
+                    child: Text(
+                      'Next',
+                      style: TextStyle(
+                        fontSize: 16.h,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20.h),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

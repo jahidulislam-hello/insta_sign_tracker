@@ -4,7 +4,14 @@ import '../../features/onboarding/presentation/controller/onboarding_controller.
 import '../../features/real_state_agent/academy_terms&pricing/presentation/controller/academy_controller.dart';
 import '../../features/real_state_agent/home/presentation/controller/home_controller.dart';
 import '../../features/real_state_agent/invoice_assistent/presentation/controller/invoice_controller.dart';
-import '../../features/real_state_agent/services/presentation/controller/services_list_controller.dart';
+import '../../features/real_state_agent/services/home/presentation/controller/services_list_controller.dart';
+import '../../features/real_state_agent/services/media_other_service/presentation/controller/media_controller.dart';
+import '../../features/real_state_agent/services/media_other_service/presentation/controller/other_service_controller.dart';
+import '../../features/real_state_agent/services/removal_change/presentation/controller/removal_change_controller.dart';
+import '../../features/real_state_agent/services/sales_direction/presentation/controller/sale_direction_controller.dart';
+import '../../features/real_state_agent/services/sign_installation/presentation/controller/review_order_status.dart';
+import '../../features/real_state_agent/services/sign_installation/presentation/controller/sign_installation_controller.dart';
+import '../../features/real_state_agent/services/sign_printing/presentation/sign_printing_controller.dart';
 import '../../features/real_state_agent/settings_profile/presentation/controller/profile_controller.dart';
 import '../services/cache_service.dart';
 import '../services/storage_service.dart';
@@ -51,6 +58,34 @@ class DependencyInjection {
     );
     Get.lazyPut<ServicesListController>(
           () => ServicesListController(),
+      fenix: true,
+    );
+    Get.lazyPut<SignInstallationController>(
+          () => SignInstallationController(),
+      fenix: true,
+    );
+    Get.lazyPut<ReviewOrderStatus>(
+          () => ReviewOrderStatus(),
+      fenix: true,
+    );
+    Get.lazyPut<SignPrintingController>(
+          () => SignPrintingController(),
+      fenix: true,
+    );
+    Get.lazyPut<RemovalChangeController>(
+          () => RemovalChangeController(),
+      fenix: true,
+    );
+    Get.lazyPut<MediaController>(
+          () => MediaController(),
+      fenix: true,
+    );
+    Get.lazyPut<OtherServiceController>(
+          () => OtherServiceController(),
+      fenix: true,
+    );
+    Get.lazyPut<SaleDirectionController>(
+          () => SaleDirectionController(),
       fenix: true,
     );
 

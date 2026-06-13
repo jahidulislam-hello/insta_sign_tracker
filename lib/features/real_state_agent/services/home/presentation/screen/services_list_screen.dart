@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_sign_tracker/core/routes/app_routes.dart';
 import 'package:insta_sign_tracker/core/utils/app_colors.dart';
-import 'package:insta_sign_tracker/features/real_state_agent/services/presentation/controller/services_list_controller.dart';
+import '../../../../home/presentation/widget/app_drawer_widget.dart';
+import '../controller/services_list_controller.dart';
 
-import '../../../home/presentation/widget/app_drawer_widget.dart';
 
 class ServicesListScreen extends GetView<ServicesListController> {
   const ServicesListScreen({super.key});
@@ -26,7 +27,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: AppColors.primaryBlue,
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Order New Sign Install',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.signInstallationScreen);
+              },
             ),
 
             _buildServiceItem(
@@ -34,7 +37,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: AppColors.primaryBlue,
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Order Sign Printing',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.signPrintingScreen);
+              },
             ),
 
             _buildServiceItem(
@@ -42,7 +47,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: const Color(0xFFD32F2F),
               iconBgColor: const Color(0xFFFFEBEE),
               title: 'Order Sign Removal',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.signRemovalScreen);
+              },
             ),
 
             _buildServiceItem(
@@ -50,7 +57,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: AppColors.primaryBlue,
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Order Sign Change\nRequest',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.signChangeScreen);
+              },
             ),
 
             const SizedBox(height: 16),
@@ -63,7 +72,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: AppColors.primaryBlue,
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Order For Sale\nDirectionals',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.saleDirectionScreen);
+              },
             ),
 
             _buildServiceItem(
@@ -79,7 +90,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: AppColors.primaryBlue,
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Order Media Services',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.mediaServiceScreen);
+              },
             ),
 
             _buildServiceItem(
@@ -88,7 +101,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconBgColor: const Color(0xFFE3F2FD),
               title: 'Other Service',
               badge: 'NEW',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.otherServiceScreen);
+              },
             ),
 
             const SizedBox(height: 20),

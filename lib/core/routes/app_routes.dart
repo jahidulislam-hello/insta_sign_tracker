@@ -22,5 +22,16 @@ abstract class AppRoutes {
   static const String termsPricingScreen = '/termsPricingScreen';
   static const String profileScreen = '/profileScreen';
   static const String servicesListScreen = '/servicesListScreen';
+  static const String signInstallationScreen = '/signInstallationScreen';
+  static const String signInstallation2ndScreen = '/signInstallation2ndScreen';
+  static const String reviewOrderScreen = '/reviewOrderScreen';
+  static const String orderStatusScreen = '/orderStatusScreen';
+  static const String signPrintingScreen = '/signPrintingScreen';
+  static const String signRemovalScreen = '/signRemovalScreen';
+  static const String signChangeScreen = '/signChangeScreen';
+  static const String mediaServiceScreen = '/mediaServiceScreen';
+  static const String mediaPlaceOrderScreen = '/mediaPlaceOrderScreen';
+  static const String otherServiceScreen = '/otherServiceScreen';
+  static const String saleDirectionScreen = '/saleDirectionScreen';
 
 }
