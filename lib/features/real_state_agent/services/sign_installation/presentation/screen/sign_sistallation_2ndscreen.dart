@@ -33,7 +33,7 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                     Text(
                       'Upload Image',
                       style: TextStyle(
-                        fontSize: 14.h,
+                        fontSize: 13.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -41,12 +41,7 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                     SizedBox(height: 8.h),
                     GestureDetector(
                       onTap: () {
-                        // Image pick করার জন্য
-                        Get.snackbar(
-                          'Image',
-                          'Image picker will open here',
-                          duration: const Duration(seconds: 1),
-                        );
+                        controller.pickImage();
                       },
                       child: Container(
                         width: double.infinity,
@@ -54,9 +49,9 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Colors.grey[300]!,
-                            width: 2,
+                            width: 1.5,
                           ),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           color: Colors.grey[50],
                         ),
                         child: Column(
@@ -64,14 +59,14 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                           children: [
                             Icon(
                               Icons.image_outlined,
-                              size: 40,
+                              size: 35,
                               color: Colors.blue,
                             ),
                             SizedBox(height: 8.h),
                             Text(
-                              'Uploaded Image',
+                              'Upload Image',
                               style: TextStyle(
-                                fontSize: 14.h,
+                                fontSize: 13.sp,
                                 color: Colors.blue,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -84,16 +79,16 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                 ),
               ),
 
-              // ===== Confirm Address =====
+              // ===== Confirm Address Dropdown =====
               Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
+                padding: EdgeInsets.only(bottom: 16.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Confirm that the address is accurate',
+                      'I confirm that the address is accurate',
                       style: TextStyle(
-                        fontSize: 14.h,
+                        fontSize: 13.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -103,12 +98,15 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                           () => DropdownButtonFormField<String>(
                         initialValue:
                         controller.confirmAddress.value.isEmpty
-                            ? null
+                            ? 'Yes'
                             : controller.confirmAddress.value,
                         items: const ['Yes', 'No']
                             .map((item) => DropdownMenuItem(
                           value: item,
-                          child: Text(item),
+                          child: Text(
+                            item,
+                            style: TextStyle(fontSize: 13.sp),
+                          ),
                         ))
                             .toList(),
                         onChanged: (value) {
@@ -117,20 +115,23 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                           }
                         },
                         decoration: InputDecoration(
-                          hintText: 'Select',
                           contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
+                            horizontal: 12.w,
                             vertical: 12.h,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(
+                              color: Colors.grey[300]!,
+                              width: 1,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: BorderSide(
+                              color: Colors.grey[300]!,
+                              width: 1,
+                            ),
                           ),
                           filled: true,
                           fillColor: Colors.white,
@@ -141,12 +142,29 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                 ),
               ),
 
-              // ===== Location =====
-              CustomTextField(
-                controller: controller.locationController,
-                hintText: 'Assign Lockbox',
-                labelText: 'Location',
-                borderColor: Colors.black,
+              // ===== Agent Lockbox =====
+              Padding(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Agent Lockbox',
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    CustomTextField(
+                      controller: controller.locationController,
+                      hintText: 'Assign Lockbox',
+                      labelText: '',
+                      borderColor: Colors.grey[300]!,
+                    ),
+                  ],
+                ),
               ),
 
               // ===== Site Warning =====
@@ -158,7 +176,7 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                     Text(
                       'Site Warning',
                       style: TextStyle(
-                        fontSize: 14.h,
+                        fontSize: 13.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -174,9 +192,10 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                         },
                         title: Text(
                           'Underground sprinkler system',
-                          style: TextStyle(fontSize: 13.h),
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                         controlAffinity: ListTileControlAffinity.leading,
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
                     Obx(
@@ -188,9 +207,10 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                         },
                         title: Text(
                           'Underground utility system',
-                          style: TextStyle(fontSize: 13.h),
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                         controlAffinity: ListTileControlAffinity.leading,
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
                     Obx(
@@ -202,9 +222,10 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                         },
                         title: Text(
                           'Invisible dog fence',
-                          style: TextStyle(fontSize: 13.h),
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                         controlAffinity: ListTileControlAffinity.leading,
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
                   ],
@@ -220,7 +241,7 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                     Text(
                       'Add-on Services',
                       style: TextStyle(
-                        fontSize: 14.h,
+                        fontSize: 13.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
                       ),
@@ -235,9 +256,10 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                         },
                         title: Text(
                           'Add brochure box',
-                          style: TextStyle(fontSize: 13.h),
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                         controlAffinity: ListTileControlAffinity.leading,
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
                     Obx(
@@ -248,160 +270,11 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                           controller.shoeCovers.value = value ?? false;
                         },
                         title: Text(
-                          'Shoe covers',
-                          style: TextStyle(fontSize: 13.h),
+                          'Shoe Covers',
+                          style: TextStyle(fontSize: 13.sp),
                         ),
                         controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // ===== Custom Choice Sign Installation =====
-              Padding(
-                padding: EdgeInsets.only(bottom: 16.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Custom Choice Sign Installation',
-                      style: TextStyle(
-                        fontSize: 14.h,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          Get.snackbar(
-                            'Info',
-                            'Add custom choice',
-                            duration: const Duration(seconds: 1),
-                          );
-                        },
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        iconSize: 20,
-                        padding: EdgeInsets.zero,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // ===== Material Type =====
-              Padding(
-                padding: EdgeInsets.only(bottom: 12.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Material Type',
-                      style: TextStyle(
-                        fontSize: 14.h,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Obx(
-                          () => DropdownButtonFormField<String>(
-                        initialValue: controller.selectedMaterial.value.isEmpty
-                            ? null
-                            : controller.selectedMaterial.value,
-                        items: controller.materialTypes
-                            .map((type) => DropdownMenuItem(
-                          value: type,
-                          child: Text(type),
-                        ))
-                            .toList(),
-                        onChanged: (value) {
-                          if (value != null) {
-                            controller.selectedMaterial.value = value;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Select Material',
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 12.h,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // ===== Choose Size =====
-              Padding(
-                padding: EdgeInsets.only(bottom: 16.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Choose Size',
-                      style: TextStyle(
-                        fontSize: 14.h,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Obx(
-                          () => DropdownButtonFormField<String>(
-                        initialValue: controller.selectedSize.value.isEmpty
-                            ? null
-                            : controller.selectedSize.value,
-                        items: controller.sizeTypes
-                            .map((size) => DropdownMenuItem(
-                          value: size,
-                          child: Text(size),
-                        ))
-                            .toList(),
-                        onChanged: (value) {
-                          if (value != null) {
-                            controller.selectedSize.value = value;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Choose Size',
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 12.h,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.r),
-                            borderSide:
-                            const BorderSide(color: Colors.grey),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
+                        visualDensity: VisualDensity.compact,
                       ),
                     ),
                   ],
@@ -412,84 +285,88 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
               Padding(
                 padding: EdgeInsets.only(bottom: 16.h),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Add top riser
-                    Container(
+                    // Add top riser - Light Blue
+                    SizedBox(
                       width: double.infinity,
-                      margin: EdgeInsets.only(bottom: 8.h),
-                      child: OutlinedButton.icon(
+                      child: ElevatedButton.icon(
                         onPressed: () {
-                          Get.snackbar(
-                            'Info',
-                            'Top riser added',
-                            duration: const Duration(seconds: 1),
-                          );
+                          controller.addTopRiser();
                         },
-                        icon: const Icon(Icons.add, color: Colors.blue),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF52B5F7),
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        icon: const Icon(Icons.add_circle,
+                            color: Colors.white, size: 20),
                         label: Text(
                           'Add top riser',
                           style: TextStyle(
-                            fontSize: 13.h,
-                            color: Colors.blue,
+                            fontSize: 14.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.blue),
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
                         ),
                       ),
                     ),
 
-                    // Add main panel
-                    Container(
+                    SizedBox(height: 10.h),
+
+                    // Add main panel - Green
+                    SizedBox(
                       width: double.infinity,
-                      margin: EdgeInsets.only(bottom: 8.h),
-                      child: OutlinedButton.icon(
+                      child: ElevatedButton.icon(
                         onPressed: () {
-                          Get.snackbar(
-                            'Info',
-                            'Main panel added',
-                            duration: const Duration(seconds: 1),
-                          );
+                          controller.addMainPanel();
                         },
-                        icon: const Icon(Icons.add, color: Colors.blue),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF27AE60),
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        icon: const Icon(Icons.add_circle,
+                            color: Colors.white, size: 20),
                         label: Text(
                           'Add main panel',
                           style: TextStyle(
-                            fontSize: 13.h,
-                            color: Colors.blue,
+                            fontSize: 14.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.blue),
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
                         ),
                       ),
                     ),
 
-                    // Add bottom riser
-                    Container(
+                    SizedBox(height: 10.h),
+
+                    // Add bottom riser - Dark Blue
+                    SizedBox(
                       width: double.infinity,
-                      child: OutlinedButton.icon(
+                      child: ElevatedButton.icon(
                         onPressed: () {
-                          Get.snackbar(
-                            'Info',
-                            'Bottom riser added',
-                            duration: const Duration(seconds: 1),
-                          );
+                          controller.addBottomRiser();
                         },
-                        icon: const Icon(Icons.add, color: Colors.blue),
-                        label: Text(
-                          'Add bottom riser',
-                          style: TextStyle(
-                            fontSize: 13.h,
-                            color: Colors.blue,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1E5BA8),
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.blue),
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                        icon: const Icon(Icons.add_circle,
+                            color: Colors.white, size: 20),
+                        label: Text(
+                          'Add Bottom rider',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),
@@ -497,24 +374,125 @@ class SignInstallation2ndScreen extends GetView<SignInstallationController> {
                 ),
               ),
 
-              SizedBox(height: 20.h),
+              // ===== Price Breakdown =====
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Colors.grey[200]!,
+                      width: 1,
+                    ),
+                  ),
+                  padding: EdgeInsets.all(12.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Price Breakdown',
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 12.h),
+                      // Post Install
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Post Install',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            '\$8.00',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8.h),
+                      // Credit Card Fee
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Credit Card Fee',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            '\$15.00',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12.h),
+                      Divider(
+                        color: Colors.grey[300],
+                        thickness: 1,
+                        height: 1,
+                      ),
+                      SizedBox(height: 12.h),
+                      // Total Price
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total Price',
+                            style: TextStyle(
+                              fontSize: 13.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            '\$200.00',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
               // ===== Place Order Button =====
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
                   onPressed: controller.placeOrder,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color(0xFF52B5F7),
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                  label: Text(
                     'Place Order',
                     style: TextStyle(
-                      fontSize: 16.h,
+                      fontSize: 15.sp,
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),

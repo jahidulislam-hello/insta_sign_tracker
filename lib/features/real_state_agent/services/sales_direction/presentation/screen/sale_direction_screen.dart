@@ -11,206 +11,312 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Current Install
-            _buildLabel('Current Install', required: true),
-            _buildSearchField(),
-            const SizedBox(height: 20),
+      body: Form(
+        key: controller.formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Current Install
+              _buildLabel('Current Install', required: true),
+              _buildSearchField(),
+              const SizedBox(height: 20),
 
-            // Property Information
-            _buildSectionHeader('Property Information'),
-            _buildLabel('STREET ADDRESS'),
-            _buildInputField(
-              hint: 'Start typing address...',
-              prefixIcon: Icons.location_on_outlined,
-              onChanged: (val) => controller.streetAddress.value = val,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildLabel('UNIT / APT'),
-                      _buildInputField(
-                        hint: 'e.g. 2549',
-                        onChanged: (val) => controller.unitApt.value = val,
-                      ),
-                    ],
+              // Property Information
+              _buildSectionHeader('Property Information'),
+              _buildLabel('STREET ADDRESS', required: true),
+              _buildInputField(
+                hint: 'Start typing address...',
+                prefixIcon: Icons.location_on_outlined,
+                onChanged: (val) => controller.streetAddress.value = val,
+                validator: controller.validateStreetAddress,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildLabel('UNIT / APT'),
+                        _buildInputField(
+                          hint: 'e.g. 2549',
+                          onChanged: (val) => controller.unitApt.value = val,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildLabel('DUE DATE', required: true),
+                        GestureDetector(
+                          onTap: () => controller.pickDueDate(context),
+                          child: AbsorbPointer(
+                            child: TextFormField(
+                              controller: controller.dueDateController,
+                              decoration: _inputDecoration(hint: 'mm/dd/yyyy'),
+                              validator: controller.validateDueDate,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Order
+              _buildLabel('Order', required: true),
+              Obx(() => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      _buildLabel('DUE DATE'),
-                      GestureDetector(
-                        onTap: () => controller.pickDueDate(context),
-                        child: AbsorbPointer(
-                          child: TextFormField(
-                            controller: controller.dueDateController,
-                            decoration: _inputDecoration(hint: 'mm/dd/yyyy'),
+                      // ASAP Button - Blue when selected
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => controller.selectOrder('ASAP'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              color: controller.selectedOrder.value == 'ASAP'
+                                  ? AppColors.primaryBlue
+                                  : Colors.grey.shade100,
+                              border: Border.all(
+                                color: controller.selectedOrder.value == 'ASAP'
+                                    ? AppColors.primaryBlue
+                                    : Colors.grey.shade300,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'ASAP',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: controller.selectedOrder.value == 'ASAP'
+                                      ? Colors.white
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      // Rush Order Button - Red when selected
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => controller.selectOrder('Rush'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              color: controller.selectedOrder.value == 'Rush'
+                                  ? const Color(0xFFD32F2F)
+                                  : Colors.grey.shade100,
+                              border: Border.all(
+                                color: controller.selectedOrder.value == 'Rush'
+                                    ? const Color(0xFFD32F2F)
+                                    : Colors.grey.shade300,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.bolt,
+                                  size: 18,
+                                  color: controller.selectedOrder.value == 'Rush'
+                                      ? Colors.white
+                                      : Colors.black54,
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  'Rush Order',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: controller.selectedOrder.value == 'Rush'
+                                        ? Colors.white
+                                        : Colors.black54,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-
-            // Order
-            _buildLabel('Order'),
-            Obx(() => Row(
-              children: [
-                _buildOrderButton(
-                  label: 'ASAP',
-                  isSelected: controller.selectedOrder.value == 'ASAP',
-                  onTap: () => controller.selectOrder('ASAP'),
-                ),
-                const SizedBox(width: 10),
-                _buildOrderButton(
-                  label: 'Rush Order',
-                  isSelected: controller.selectedOrder.value == 'Rush',
-                  onTap: () => controller.selectOrder('Rush'),
-                  isRush: true,
-                ),
-              ],
-            )),
-            const SizedBox(height: 20),
-
-            // Packages
-            _buildLabel('Packages'),
-            Obx(() => _buildDropdown(
-              value: controller.selectedPackage.value,
-              items: controller.packageOptions,
-              hint: 'Basic Package',
-              onChanged: (val) => controller.selectedPackage.value = val,
-            )),
-            const SizedBox(height: 20),
-
-            // Sign Placement
-            _buildSectionHeader('Sign Placement'),
-            Obx(() => _buildDropdown(
-              value: controller.selectedSignPlacement.value,
-              items: controller.signPlacementOptions,
-              hint: "I'll choose",
-              onChanged: (val) =>
-              controller.selectedSignPlacement.value = val,
-            )),
-            const SizedBox(height: 12),
-
-            // Lead-In Intersection
-            _buildLabel('Lead-In Intersection'),
-            _buildTextArea(
-              hint: 'Where would you like us to begin placing sign',
-              onChanged: (val) => controller.leadInIntersection.value = val,
-            ),
-            const SizedBox(height: 12),
-
-            // Note
-            _buildLabel('Note'),
-            _buildTextArea(
-              hint: 'Type here...',
-              onChanged: (val) => controller.note.value = val,
-            ),
-            const SizedBox(height: 12),
-
-            // Select a For Sale Directional
-            _buildLabel('Select a For Sale Directional'),
-            Obx(() => _buildDropdown(
-              value: controller.selectedDirectional.value,
-              items: controller.directionalOptions,
-              hint: 'Select a Directional',
-              onChanged: (val) =>
-              controller.selectedDirectional.value = val,
-            )),
-            const SizedBox(height: 24),
-
-            // ADD-ONS
-            _buildSectionHeader('ADD-ONS'),
-            Obx(() => _buildAddonItem(
-              title: 'Shoe Covers',
-              subtitle: 'Pack of 10 at listing',
-              price: '+\$8.00',
-              isChecked: controller.isShoeCoverSelected.value,
-              onChanged: controller.toggleShoeCover,
-            )),
-            Obx(() => _buildAddonItem(
-              title: 'Flyer Box Refill',
-              subtitle: 'Check & refill brochures',
-              price: '+\$15.00',
-              isChecked: controller.isFlyerBoxSelected.value,
-              onChanged: controller.toggleFlyerBox,
-            )),
-            const SizedBox(height: 20),
-
-            // Price Breakdown
-            _buildSectionHeader('Price Breakdown'),
-            Obx(() => Column(
-              children: [
-                _buildPriceRow('Post Install',
-                    '\$${controller.shoeCoverPrice.toStringAsFixed(2)}'),
-                _buildPriceRow('Credit Card Fee',
-                    '\$${controller.creditCardFee.toStringAsFixed(2)}'),
-                const Divider(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Total Price',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
+                  if (controller.selectedOrder.value == null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        'Please select an order type',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.red.shade600,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                    Text(
-                      '\$${controller.totalPrice.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primaryBlue,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )),
-            const SizedBox(height: 24),
+                ],
+              )),
+              const SizedBox(height: 20),
 
-            // Place Order Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: controller.placeOrder,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryBlue,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
-                ),
-                icon: const Text(
-                  'Place Order',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-                label: const Icon(Icons.arrow_forward, color: Colors.white),
+              // Packages
+              _buildLabel('Packages', required: true),
+              Obx(() => _buildDropdown(
+                value: controller.selectedPackage.value,
+                items: controller.packageOptions,
+                hint: 'Select Package',
+                onChanged: (val) => controller.selectedPackage.value = val,
+                validator: controller.validatePackage,
+              )),
+              const SizedBox(height: 20),
+
+              // Sign Placement
+              _buildSectionHeader('Sign Placement'),
+              Obx(() => _buildDropdown(
+                value: controller.selectedSignPlacement.value,
+                items: controller.signPlacementOptions,
+                hint: "I'll choose",
+                onChanged: (val) =>
+                controller.selectedSignPlacement.value = val,
+              )),
+              const SizedBox(height: 12),
+
+              // Lead-In Intersection
+              _buildLabel('Lead-In Intersection'),
+              _buildInputField(
+                hint: 'Where would you like us to begin placing sign',
+                onChanged: (val) => controller.leadInIntersectionController.text = val,
+                maxLines: 3,
               ),
-            ),
-            const SizedBox(height: 30),
-          ],
+              const SizedBox(height: 12),
+
+              // Note
+              _buildLabel('Note'),
+              _buildInputField(
+                hint: 'Type here...',
+                onChanged: (val) => controller.noteController.text = val,
+                maxLines: 3,
+              ),
+              const SizedBox(height: 12),
+
+              // Select a For Sale Directional
+              _buildLabel('Select a For Sale Directional', required: true),
+              Obx(() => _buildDropdown(
+                value: controller.selectedDirectional.value,
+                items: controller.directionalOptions,
+                hint: 'Select a Directional',
+                onChanged: (val) =>
+                controller.selectedDirectional.value = val,
+                validator: controller.validateDirectional,
+              )),
+              const SizedBox(height: 24),
+
+              // ADD-ONS
+              _buildSectionHeader('ADD-ONS'),
+              Obx(() => _buildAddonItem(
+                title: 'Shoe Covers',
+                subtitle: 'Pack of 10 at listing',
+                price: '+\$${controller.shoeCoverPrice.toStringAsFixed(2)}',
+                isChecked: controller.isShoeCoverSelected.value,
+                onChanged: controller.toggleShoeCover,
+              )),
+              Obx(() => _buildAddonItem(
+                title: 'Flyer Box Refill',
+                subtitle: 'Check & refill brochures',
+                price: '+\$${controller.flyerBoxPrice.toStringAsFixed(2)}',
+                isChecked: controller.isFlyerBoxSelected.value,
+                onChanged: controller.toggleFlyerBox,
+              )),
+              const SizedBox(height: 20),
+
+              // Price Breakdown
+              _buildSectionHeader('Price Breakdown'),
+              Obx(() => Column(
+                children: [
+                  _buildPriceRow('Base Price',
+                      '\$${controller.basePrice.value.toStringAsFixed(2)}'),
+                  if (controller.isShoeCoverSelected.value)
+                    _buildPriceRow('Shoe Covers',
+                        '+\$${controller.shoeCoverPrice.toStringAsFixed(2)}'),
+                  if (controller.isFlyerBoxSelected.value)
+                    _buildPriceRow('Flyer Box',
+                        '+\$${controller.flyerBoxPrice.toStringAsFixed(2)}'),
+                  _buildPriceRow('Credit Card Fee',
+                      '\$${controller.creditCardFee.toStringAsFixed(2)}'),
+                  const SizedBox(height: 12),
+                  const Divider(height: 1),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Total Price',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        '\$${controller.totalPrice.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primaryBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )),
+              const SizedBox(height: 24),
+
+              // Place Order Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: controller.placeOrder,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryBlue,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                  label: const Text(
+                    'Place Order',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
@@ -299,19 +405,24 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(color: AppColors.primaryBlue, width: 1.5),
       ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: Colors.red.shade400, width: 1.5),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: Colors.red.shade400, width: 1.5),
+      ),
     );
   }
 
   // ===================== SEARCH FIELD =====================
   Widget _buildSearchField() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: TextField(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: TextFormField(
         onChanged: (val) => controller.currentInstall.value = val,
+        validator: controller.validateCurrentInstall,
         decoration: _inputDecoration(hint: 'Search Current Install').copyWith(
           suffixIcon:
           const Icon(Icons.search, color: Colors.black54, size: 22),
@@ -325,11 +436,15 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
     required String hint,
     IconData? prefixIcon,
     Function(String)? onChanged,
+    String? Function(String?)? validator,
+    int maxLines = 1,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
+      child: TextFormField(
         onChanged: onChanged,
+        validator: validator,
+        maxLines: maxLines,
         style: const TextStyle(fontSize: 15),
         decoration: _inputDecoration(hint: hint).copyWith(
           prefixIcon: prefixIcon != null
@@ -340,28 +455,13 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
     );
   }
 
-  // ===================== TEXTAREA =====================
-  Widget _buildTextArea({
-    required String hint,
-    Function(String)? onChanged,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: TextField(
-        maxLines: 3,
-        onChanged: onChanged,
-        style: const TextStyle(fontSize: 15),
-        decoration: _inputDecoration(hint: hint),
-      ),
-    );
-  }
-
   // ===================== DROPDOWN =====================
   Widget _buildDropdown({
     required String? value,
     required List<String> items,
     required String hint,
     required Function(String?) onChanged,
+    String? Function(String?)? validator,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -378,60 +478,11 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
         ))
             .toList(),
         onChanged: onChanged,
+        validator: validator,
         icon: const Icon(Icons.keyboard_arrow_down, color: Colors.black54),
         decoration: _inputDecoration(),
         dropdownColor: Colors.white,
         style: const TextStyle(fontSize: 15, color: Colors.black87),
-      ),
-    );
-  }
-
-  // ===================== ORDER BUTTON =====================
-  Widget _buildOrderButton({
-    required String label,
-    required bool isSelected,
-    required VoidCallback onTap,
-    bool isRush = false,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding:
-        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        decoration: BoxDecoration(
-          color: isRush
-              ? Colors.white
-              : (isSelected ? AppColors.primaryBlue : Colors.grey.shade50),
-          border: Border.all(
-            color: isRush
-                ? const Color(0xFFD32F2F)
-                : (isSelected
-                ? AppColors.primaryBlue
-                : Colors.grey.shade200),
-            width: 1.5,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isRush) ...[
-              const Icon(Icons.bolt,
-                  size: 18, color: Color(0xFFD32F2F)),
-              const SizedBox(width: 4),
-            ],
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: isRush
-                    ? const Color(0xFFD32F2F)
-                    : (isSelected ? Colors.white : Colors.black87),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -470,8 +521,7 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
                 ),
               ),
               child: isChecked
-                  ? const Icon(Icons.check,
-                  size: 15, color: Colors.white)
+                  ? const Icon(Icons.check, size: 15, color: Colors.white)
                   : null,
             ),
           ),
@@ -525,8 +575,7 @@ class SaleDirectionScreen extends GetView<SaleDirectionController> {
           ),
           Text(
             value,
-            style: const TextStyle(
-                fontSize: 15, color: Colors.black87),
+            style: const TextStyle(fontSize: 15, color: Colors.black87),
           ),
         ],
       ),

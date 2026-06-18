@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_sign_tracker/core/routes/app_routes.dart';
 
 class SaleDirectionController extends GetxController {
+  final formKey = GlobalKey<FormState>();
+
   final currentInstall = ''.obs;
   final streetAddress = ''.obs;
   final unitApt = ''.obs;
   final dueDateController = TextEditingController();
-  final selectedOrder = 'ASAP'.obs;
+  final leadInIntersectionController = TextEditingController();
+  final noteController = TextEditingController();
+
+  final selectedOrder = RxnString(); // null by default - unselected
   final selectedPackage = RxnString();
   final selectedSignPlacement = RxnString();
-  final leadInIntersection = ''.obs;
-  final note = ''.obs;
   final selectedDirectional = RxnString();
 
   final isShoeCoverSelected = true.obs;
@@ -34,10 +38,13 @@ class SaleDirectionController extends GetxController {
   final signPlacementOptions = ["I'll choose", 'Agent places', 'Installer places'];
   final directionalOptions = ['Directional A', 'Directional B', 'Directional C'];
 
+  // Order Select
   void selectOrder(String order) => selectedOrder.value = order;
+
   void toggleShoeCover(bool? val) => isShoeCoverSelected.value = val ?? false;
   void toggleFlyerBox(bool? val) => isFlyerBoxSelected.value = val ?? false;
 
+  // Date Picker
   Future<void> pickDueDate(BuildContext context) async {
     final picked = await showDatePicker(
       context: context,
@@ -51,24 +58,61 @@ class SaleDirectionController extends GetxController {
     }
   }
 
+  // Validation Methods
+  String? validateCurrentInstall(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please select a current install';
+    }
+    return null;
+  }
+
+  String? validateStreetAddress(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Street address is required';
+    }
+    return null;
+  }
+
+  String? validateDueDate(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Due date is required';
+    }
+    return null;
+  }
+
+  String? validateOrder(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please select an order type';
+    }
+    return null;
+  }
+
+  String? validatePackage(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please select a package';
+    }
+    return null;
+  }
+
+  String? validateDirectional(String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please select a directional';
+    }
+    return null;
+  }
+
+  // Place Order
   void placeOrder() {
-    if (currentInstall.value.isEmpty) {
-      Get.snackbar('Error', 'Please select a current install',
-          snackPosition: SnackPosition.BOTTOM);
-      return;
+    if (formKey.currentState!.validate()) {
+      Get.toNamed(AppRoutes.checkOutScreen);
     }
-    if (streetAddress.value.isEmpty) {
-      Get.snackbar('Error', 'Please enter a street address',
-          snackPosition: SnackPosition.BOTTOM);
-      return;
-    }
-    Get.snackbar('Success', 'Order placed successfully!',
-        snackPosition: SnackPosition.BOTTOM);
   }
 
   @override
   void onClose() {
     dueDateController.dispose();
+    leadInIntersectionController.dispose();
+    noteController.dispose();
     super.onClose();
   }
 }

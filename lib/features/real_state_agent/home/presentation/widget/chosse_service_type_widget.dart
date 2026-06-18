@@ -52,9 +52,9 @@ class ChooseServiceTypeWidget extends StatelessWidget {
   // ===== Service Item Widget =====
   Widget _buildServiceItem(BuildContext context, ServiceItem item) {
     return GestureDetector(
-      onTap: () {
-        // Blank onTap - API integration এর জন্য
+      onTap:(){
         onServiceSelected?.call(item.title);
+        item.goNextPage();
       },
       child: Container(
         decoration: BoxDecoration(

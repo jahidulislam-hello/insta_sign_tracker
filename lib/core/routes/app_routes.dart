@@ -1,19 +1,19 @@
 abstract class AppRoutes {
   AppRoutes._();
 
-  //onboarding
+  //-----------------------onboarding-------------------------------------------
   static const String splash = '/';
   static const String onboardingScreen = '/onboardingScreen';
   static const String selectRole = '/selectRole';
 
-  //authScreen
+  //------------------------authScreen------------------------------------------
   static const String signup = '/signup';
   static const String login = '/login';
   static const String enterEmailScreen = '/enterEmailScreen';
   static const String otpVerifyScreen = '/otpVerifyScreen';
   static const String resetPassScreen = '/resetPassScreen';
 
-  //--------------------Real State Agent--------------------
+  //--------------------Real State Agent----------------------------------------
   static const String homeScreen = '/homeScreen';
   static const String invoiceScreen = '/invoiceScreen';
   static const String assistantManagementScreen = '/assistantManagementScreen';
@@ -33,5 +33,16 @@ abstract class AppRoutes {
   static const String mediaPlaceOrderScreen = '/mediaPlaceOrderScreen';
   static const String otherServiceScreen = '/otherServiceScreen';
   static const String saleDirectionScreen = '/saleDirectionScreen';
+  static const String checkOutScreen = '/checkOutScreen';
+  static const String addCardScreen = '/addCardScreen';
+  static const String houseServiceScreen = '/houseServiceScreen';
+  static const String homeServiceSecondScreen = '/homeServiceSecondScreen';
+  static const String houseServiceTherdScreen = '/houseServiceTherdScreen';
+  static const String allUserSettingScreen = '/allUserSettingScreen';
+
+
+  //------------------------Main Admin------------------------------------------
+  static const String dashboardScreen = '/dashboardScreen';
+  static const String settingsScreen = '/settingsScreen';
 
 }

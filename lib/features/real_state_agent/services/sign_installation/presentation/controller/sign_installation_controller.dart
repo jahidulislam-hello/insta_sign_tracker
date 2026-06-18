@@ -110,6 +110,42 @@ class SignInstallationController extends GetxController {
     });
   }
 
+  // Image pick করার method
+  Future<void> pickImage() async {
+    Get.snackbar(
+      'Image',
+      'Image picker will open here',
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+// Add top riser
+  void addTopRiser() {
+    Get.snackbar(
+      'Info',
+      'Top riser added',
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+// Add main panel
+  void addMainPanel() {
+    Get.snackbar(
+      'Info',
+      'Main panel added',
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+// Add bottom riser
+  void addBottomRiser() {
+    Get.snackbar(
+      'Info',
+      'Bottom riser added',
+      duration: const Duration(seconds: 1),
+    );
+  }
+
   @override
   void onClose() {
     addressController.dispose();

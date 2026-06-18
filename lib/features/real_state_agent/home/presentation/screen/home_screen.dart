@@ -408,7 +408,8 @@ class HomeScreen extends GetView<HomeController> {
     required IconData icon,
     required String label,
     required bool isSelected,
-  }) {
+  })
+  {
     return GestureDetector(
       onTap: () {
         // Later navigation implement করবো

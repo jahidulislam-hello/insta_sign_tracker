@@ -82,7 +82,9 @@ class ServicesListScreen extends GetView<ServicesListController> {
               iconColor: const Color(0xFFD32F2F),
               iconBgColor: const Color(0xFFFFEBEE),
               title: 'Order Open House\nServices',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(AppRoutes.houseServiceScreen);
+              },
             ),
 
             _buildServiceItem(

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           ),
           defaultTransition: Transition.rightToLeft,
           transitionDuration: const Duration(milliseconds: 250),
-          initialRoute: AppRoutes.homeScreen,
+          initialRoute: AppRoutes.dashboardScreen,
           getPages: AppPages.routes,
         );
       },
