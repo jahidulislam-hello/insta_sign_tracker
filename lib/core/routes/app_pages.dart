@@ -6,8 +6,10 @@ import '../../features/Authentication/presentation/screen/reset_pass_screen.dart
 import '../../features/Authentication/presentation/screen/select_role.dart';
 import '../../features/Authentication/presentation/screen/sign_up_screen.dart';
 import '../../features/main_admin/dashboard_and_user_management/presentation/screen/dashboard_screen.dart';
+import '../../features/main_admin/invoices/presentation/screen/admin_invoices_screen.dart';
 import '../../features/main_admin/settings_announcement/screen/all_user_setting_screen.dart';
 import '../../features/main_admin/settings_announcement/screen/settings_screen.dart';
+import '../../features/main_admin/warehouses_screen/presentation/screen/warehouses_screen.dart';
 import '../../features/onboarding/presentation/screen/onboarding_screen.dart';
 import '../../features/onboarding/presentation/screen/splash_screen.dart';
 import '../../features/real_state_agent/academy_terms&pricing/presentation/screen/academy_details_screen.dart';
@@ -75,7 +77,6 @@ abstract class AppPages {
       name: AppRoutes.resetPassScreen,
       page: () => const ResetPassScreen(),
     ),
-
 
     //-----------------Real State Agent-----------------------------------------
     GetPage(
@@ -183,12 +184,18 @@ abstract class AppPages {
       page: () => const AllUserSettingScreen(),
     ),
 
-
     //------------------------Main Admin----------------------------------------
     GetPage(
       name: AppRoutes.dashboardScreen,
-      page: () =>  DashboardScreen(),
+      page: () => DashboardScreen(),
     ),
-
+    GetPage(
+      name: AppRoutes.adminInvoicesScreen,
+      page: () => AdminInvoicesScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.warehousesScreen,
+      page: () => WarehousesScreen(),
+    ),
   ];
 }

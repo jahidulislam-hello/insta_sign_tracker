@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:insta_sign_tracker/core/utils/app_colors.dart';
 import '../controller/dashboard_controller.dart';
 import '../widget/admin_app_drawer_widget.dart';
 
@@ -96,7 +97,7 @@ class DashboardScreen extends GetView<DashboardController> {
                         backgroundColor: Colors.white,
                         child: Icon(
                           Icons.trending_up,
-                          color: Color(0xFFEF5350),
+                          color: Colors.black,
                           size: 30.sp,
                         ),
                       ),
@@ -121,29 +122,29 @@ class DashboardScreen extends GetView<DashboardController> {
                   icon: Icons.account_balance_wallet,
                   amount: '\$${controller.todayDeposit.value.toStringAsFixed(0)}',
                   label: "TODAY'S DEPOSIT",
-                  color: Color(0xFF42A5F5),
+                  color: AppColors.blackGreen,
                   bgColor: Color(0xFFE3F2FD),
                 ),
                 _StatCard(
-                  icon: Icons.shopping_cart,
+                  icon: Icons.edit_calendar_outlined,
                   amount: '\$${controller.pendingOrders.value.toStringAsFixed(0)}',
                   label: 'PENDING ORDERS',
-                  color: Color(0xFFAB47BC),
-                  bgColor: Color(0xFFF3E5F5),
+                  color: AppColors.blackGreen,
+                  bgColor:Colors.grey.withValues(alpha: 0.3),
                 ),
                 _StatCard(
                   icon: Icons.receipt_long,
                   amount: '${controller.unpaidInvoices.value}',
                   label: 'UNPAID INVOICES',
-                  color: Color(0xFFEF5350),
+                  color:AppColors.blackGreen,
                   bgColor: Color(0xFFFFEBEE),
                 ),
                 _StatCard(
-                  icon: Icons.inventory_2,
+                  icon: Icons.calendar_today_outlined,
                   amount: '${controller.lowStock.value}',
                   label: 'LOW STOCK',
-                  color: Color(0xFF66BB6A),
-                  bgColor: Color(0xFFE8F5E9),
+                  color:AppColors.blackGreen,
+                  bgColor: Color(0xFFFFF9E6),
                 ),
               ],
             ),
@@ -473,8 +474,8 @@ class _StatCard extends StatelessWidget {
             width: 40.w,
             height: 40.w,
             decoration: BoxDecoration(
-              color: color.withValues(alpha:0.1),
-              borderRadius: BorderRadius.circular(8.r),
+              color:Colors.white,
+              borderRadius: BorderRadius.circular(26.r),
             ),
             child: Icon(icon, color: color, size: 22.sp),
           ),
@@ -494,7 +495,7 @@ class _StatCard extends StatelessWidget {
                 label,
                 style: TextStyle(
                   fontSize: 11.sp,
-                  color: Color(0xFF757575),
+                  color: AppColors.green,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.3,
                 ),

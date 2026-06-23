@@ -44,5 +44,8 @@ abstract class AppRoutes {
   //------------------------Main Admin------------------------------------------
   static const String dashboardScreen = '/dashboardScreen';
   static const String settingsScreen = '/settingsScreen';
+  static const String adminInvoicesScreen = '/adminInvoicesScreen';
+  static const String warehousesScreen = '/warehousesScreen';
+  static const String warehousesDetails = '/warehousesDetails';
 
 }

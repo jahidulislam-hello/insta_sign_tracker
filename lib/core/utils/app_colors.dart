@@ -30,4 +30,9 @@ class AppColors {
   static Color grey400 = Colors.grey[400]!;
   static Color grey600 = Colors.grey[600]!;
   static Color grey700 = Colors.grey[700]!;
+
+  //green
+  static const Color blackGreen = Color(0xFF004D3C);
+  static const Color green = Color(0xFF007A5E);
+
 }
