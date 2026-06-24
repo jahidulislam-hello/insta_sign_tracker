@@ -47,5 +47,8 @@ abstract class AppRoutes {
   static const String adminInvoicesScreen = '/adminInvoicesScreen';
   static const String warehousesScreen = '/warehousesScreen';
   static const String warehousesDetails = '/warehousesDetails';
+  static const String makeAdminScreen = '/makeAdminScreen';
+  static const String adminPrintingScreen = '/adminPrintingScreen';
+  static const String adminAnnouncementsScreen = '/adminAnnouncementsScreen';
 
 }

@@ -6,8 +6,8 @@ class DashboardController extends GetxController {
   var monthlyIncome = 12450.80.obs;
   var todayDeposit = 1000.0.obs;
   var pendingOrders = 100.0.obs;
-  var unpaidInvoices = 8.obs;
-  var lowStock = 3.obs;
+  var unpaidInvoices = 08.obs;
+  var lowStock = 03.obs;
 
   // Chart data - mock data (API theke asbe pora)
   var chartData = <double>[4500, 5200, 3800, 6100, 5400, 7200, 6800, 5900, 6500, 7100, 7800, 6200].obs;

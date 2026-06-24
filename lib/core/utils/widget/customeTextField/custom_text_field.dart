@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app_constants.dart';
 
@@ -97,10 +98,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         children: [
           if (widget.labelText != null)
             Text(widget.labelText ?? '',
-                style: TextStyle(
-                    fontSize: 14.h,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500)),
+              style: GoogleFonts.montserrat(
+                  fontSize: 14.h,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500
+              ),
+            ),
           TextFormField(
             onChanged: widget.onChanged,
             focusNode: widget.focusNode,
@@ -141,9 +144,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   return null;
                 },
             obscureText: widget.isPassword ? obscureText : false,
-            style: TextStyle(
+            style: GoogleFonts.montserrat(
                 color: widget.hinTextColor ?? Colors.black,
-                fontSize: widget.hinTextSize ?? 12),
+                fontSize: widget.hinTextSize ?? 12
+            ),
             decoration: InputDecoration(
                 counterText: '',
                 contentPadding: EdgeInsets.symmetric(
@@ -177,15 +181,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 prefixIconConstraints:
                 const BoxConstraints(minHeight: 24, minWidth: 24),
                 hintText: widget.hintText,
-                hintStyle: TextStyle(
-                    color: widget.hinTextColor ?? Colors.grey,
-                    fontSize: widget.hinTextSize ?? 16,
-                    fontWeight: FontWeight.w400),
+                hintStyle: GoogleFonts.montserrat(
+                   color: widget.hinTextColor ?? Colors.grey,
+                   fontSize: widget.hinTextSize ?? 16,
+                    fontWeight: FontWeight.w400
+                ),
                 focusedBorder: customBorder(),
                 enabledBorder: customBorder(),
                 border: customBorder(),
-                errorStyle: const TextStyle(
-                    fontSize: 12, fontWeight: FontWeight.w400)),
+                errorStyle: GoogleFonts.montserrat(
+                 fontSize: 12, fontWeight: FontWeight.w400
+              ),
+            ),
           ),
         ],
       ),

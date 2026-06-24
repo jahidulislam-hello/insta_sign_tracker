@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
 import '../../features/Authentication/presentation/controller/auth_controller.dart';
+import '../../features/main_admin/admin_announcement/presentation/controller/admin_announcements_controller.dart';
+import '../../features/main_admin/admin_printing/presentation/controller/admin_printing_controller.dart';
 import '../../features/main_admin/dashboard_and_user_management/presentation/controller/dashboard_controller.dart';
 import '../../features/main_admin/invoices/presentation/controller/admin_invoices_controller.dart';
+import '../../features/main_admin/make_admin/presentation/controller/make_admin_controller.dart';
 import '../../features/main_admin/settings_announcement/presentation/settings_controller.dart';
 import '../../features/main_admin/warehouses_screen/presentation/controller/warehouses_controller.dart';
 import '../../features/onboarding/presentation/controller/onboarding_controller.dart';
@@ -124,6 +127,18 @@ class DependencyInjection {
     );
     Get.lazyPut<WarehousesController>(
           () => WarehousesController(),
+      fenix: true,
+    );
+    Get.lazyPut<MakeAdminController>(
+          () => MakeAdminController(),
+      fenix: true,
+    );
+    Get.lazyPut<AdminPrintingController>(
+          () => AdminPrintingController(),
+      fenix: true,
+    );
+    Get.lazyPut<AdminAnnouncementsController>(
+          () => AdminAnnouncementsController(),
       fenix: true,
     );
 

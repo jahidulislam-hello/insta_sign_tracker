@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../data/model/warehouse_model.dart';
 import '../controller/warehouses_controller.dart';
 
@@ -23,7 +24,7 @@ class WarehousesDetails extends GetView<WarehousesController> {
         ),
         title: Text(
           warehouse.name,
-          style: TextStyle(
+          style: GoogleFonts.montserrat(
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -51,7 +52,7 @@ class WarehousesDetails extends GetView<WarehousesController> {
               children: [
                 TextSpan(
                   text: 'Total ',
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -60,7 +61,7 @@ class WarehousesDetails extends GetView<WarehousesController> {
                 TextSpan(
                   text:
                   '(${controller.staffList.length.toString().padLeft(2, '0')})',
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.lightBlue,
@@ -71,10 +72,9 @@ class WarehousesDetails extends GetView<WarehousesController> {
           )),
           ElevatedButton.icon(
             onPressed: controller.openAssignStaffDialog,
-            icon: Icon(Icons.add, color: Colors.white, size: 18.sp),
             label: Text(
               '+ Assign Staff',
-              style: TextStyle(
+              style: GoogleFonts.montserrat(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -125,12 +125,12 @@ class WarehousesDetails extends GetView<WarehousesController> {
             width: 44.w,
             height: 44.w,
             decoration: BoxDecoration(
-              color: Colors.lightBlue.withValues(alpha:0.12),
-              borderRadius: BorderRadius.circular(10.r),
+              color: Color(0xFFE8F2FF),
+              borderRadius: BorderRadius.circular(24.r),
             ),
             child: Icon(
               Icons.store_outlined,
-              color: Colors.lightBlue,
+              color: Color(0xFF00628B),
               size: 22.sp,
             ),
           ),
@@ -141,8 +141,8 @@ class WarehousesDetails extends GetView<WarehousesController> {
               children: [
                 Text(
                   staff.name,
-                  style: TextStyle(
-                    fontSize: 15.sp,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -150,9 +150,10 @@ class WarehousesDetails extends GetView<WarehousesController> {
                 SizedBox(height: 3.h),
                 Text(
                   staff.role,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: Colors.grey.shade500,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12.sp,
+                    color: Colors.black.withValues(alpha: 0.7),
+                    fontWeight: FontWeight.w600
                   ),
                 ),
               ],

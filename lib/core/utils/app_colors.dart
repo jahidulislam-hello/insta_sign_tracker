@@ -17,6 +17,8 @@ class AppColors {
   static const Color lightBlueBg = Color(0xFFE3F2FD);
   static const Color lightOrangeBg = Color(0xFFFFF3E0);
   static const Color lightPinkBg = Color(0xFFFFEBEE);
+  static const Color appBarColor = Color(0xFF30B3FB);
+  static const Color selectedTabColor = Color(0xFF0033CF);
 
   // Icon Colors
   static const Color coralRed = Color(0xFFE53935);
@@ -34,5 +36,7 @@ class AppColors {
   //green
   static const Color blackGreen = Color(0xFF004D3C);
   static const Color green = Color(0xFF007A5E);
+
+
 
 }

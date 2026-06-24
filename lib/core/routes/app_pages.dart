@@ -5,8 +5,11 @@ import '../../features/Authentication/presentation/screen/otp_verify_screen.dart
 import '../../features/Authentication/presentation/screen/reset_pass_screen.dart';
 import '../../features/Authentication/presentation/screen/select_role.dart';
 import '../../features/Authentication/presentation/screen/sign_up_screen.dart';
+import '../../features/main_admin/admin_announcement/presentation/screen/admin_announcements_screen.dart';
+import '../../features/main_admin/admin_printing/presentation/screen/admin_printing_screen.dart';
 import '../../features/main_admin/dashboard_and_user_management/presentation/screen/dashboard_screen.dart';
 import '../../features/main_admin/invoices/presentation/screen/admin_invoices_screen.dart';
+import '../../features/main_admin/make_admin/presentation/screen/make_admin_screen.dart';
 import '../../features/main_admin/settings_announcement/screen/all_user_setting_screen.dart';
 import '../../features/main_admin/settings_announcement/screen/settings_screen.dart';
 import '../../features/main_admin/warehouses_screen/presentation/screen/warehouses_screen.dart';
@@ -196,6 +199,18 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.warehousesScreen,
       page: () => WarehousesScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.makeAdminScreen,
+      page: () => MakeAdminScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.adminPrintingScreen,
+      page: () => AdminPrintingScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.adminAnnouncementsScreen,
+      page: () => AdminAnnouncementsScreen(),
     ),
   ];
 }

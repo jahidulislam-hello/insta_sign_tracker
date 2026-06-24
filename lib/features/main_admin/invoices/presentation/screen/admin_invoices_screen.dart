@@ -89,34 +89,41 @@ class AdminInvoicesScreen extends GetView<AdminInvoicesController> {
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-      child: Obx(() => Row(
-        children: List.generate(controller.tabs.length, (i) {
-          final isSelected = controller.selectedTab.value == i;
-          return GestureDetector(
-            onTap: () => controller.changeTab(i),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              margin: EdgeInsets.only(right: 8.w),
-              padding: EdgeInsets.symmetric(
-                  horizontal: 14.w, vertical: 8.h),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? Colors.lightBlue
-                    : Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              child: Text(
-                controller.tabs[i],
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : Colors.black,
+      child: Obx(
+            () => SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(controller.tabs.length, (i) {
+              final isSelected = controller.selectedTab.value == i;
+              return GestureDetector(
+                onTap: () => controller.changeTab(i),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  margin: EdgeInsets.only(right: 8.w),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.w,
+                    vertical: 8.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? Colors.lightBlue
+                        : Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                  child: Text(
+                    controller.tabs[i],
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                      color: isSelected ? Colors.white : Colors.black,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        }),
-      )),
+              );
+            }),
+          ),
+        ),
+      ),
     );
   }
 

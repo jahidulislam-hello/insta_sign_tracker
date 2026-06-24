@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:insta_sign_tracker/core/utils/app_colors.dart';
 import '../controller/dashboard_controller.dart';
 import '../widget/admin_app_drawer_widget.dart';
@@ -17,7 +18,8 @@ class DashboardScreen extends GetView<DashboardController> {
       key: _scaffoldKey,
       backgroundColor: Color(0xFFF5F7FA),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        toolbarHeight: 80.h,
+        backgroundColor:AppColors.appBarColor,
         leading: IconButton(
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
@@ -27,12 +29,13 @@ class DashboardScreen extends GetView<DashboardController> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Welcome back!",style: TextStyle(
-                fontWeight: FontWeight.w700,fontSize:24.sp,color: Colors.white
+            Text("Welcome back!",
+              style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.w700,fontSize:22.sp,color: Colors.white
             ),),
-            Text("Here's what's happening today.",style: TextStyle(
-                fontWeight: FontWeight.w400,fontSize:13.sp,color: Colors.white70
-            )),
+            Text("Here's what's happening today.", style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.w400,fontSize:14.sp,color: Colors.white70
+            ),),
           ],
         ),
         actions: [
@@ -49,7 +52,20 @@ class DashboardScreen extends GetView<DashboardController> {
             Container(
               padding: EdgeInsets.all(15.w),
               decoration: BoxDecoration(
-                color: Color(0xFFE3F2FD),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Colors.white,
+                    Colors.white,
+                    AppColors.appBarColor.withValues(alpha: 0.2),
+                  ],
+                  stops: const [
+                    0.0, // Start
+                    0.4,
+                    1.0, // End Color
+                  ],
+                ),
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Column(
@@ -58,7 +74,7 @@ class DashboardScreen extends GetView<DashboardController> {
                   Text(
                     'Dashboard Overview',
                     style: TextStyle(
-                      fontSize: 22.sp,
+                      fontSize: 24.sp,
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
                     ),
@@ -73,8 +89,8 @@ class DashboardScreen extends GetView<DashboardController> {
                           Text(
                             'MONTHLY NET INCOME',
                             style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black.withValues(alpha: 0.6),
+                              fontSize: 13.sp,
+                              color: Color(0xFF001557),
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5,
                             ),
@@ -84,7 +100,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                 () => Text(
                               '\$${controller.monthlyIncome.value.toStringAsFixed(2)}',
                               style: TextStyle(
-                                fontSize: 26.sp,
+                                fontSize: 28.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -93,12 +109,12 @@ class DashboardScreen extends GetView<DashboardController> {
                         ],
                       ),
                       CircleAvatar(
-                        radius: 27,
+                        radius: 22,
                         backgroundColor: Colors.white,
                         child: Icon(
                           Icons.trending_up,
                           color: Colors.black,
-                          size: 30.sp,
+                          size: 25.sp,
                         ),
                       ),
                     ],
@@ -119,28 +135,28 @@ class DashboardScreen extends GetView<DashboardController> {
               childAspectRatio: 1.1,
               children: [
                 _StatCard(
-                  icon: Icons.account_balance_wallet,
+                  icon: Icons.payments_outlined,
                   amount: '\$${controller.todayDeposit.value.toStringAsFixed(0)}',
                   label: "TODAY'S DEPOSIT",
                   color: AppColors.blackGreen,
                   bgColor: Color(0xFFE3F2FD),
                 ),
                 _StatCard(
-                  icon: Icons.edit_calendar_outlined,
+                  icon: Icons.pending_actions_outlined,
                   amount: '\$${controller.pendingOrders.value.toStringAsFixed(0)}',
                   label: 'PENDING ORDERS',
                   color: AppColors.blackGreen,
                   bgColor:Colors.grey.withValues(alpha: 0.3),
                 ),
                 _StatCard(
-                  icon: Icons.receipt_long,
+                  icon: Icons.receipt_long_outlined,
                   amount: '${controller.unpaidInvoices.value}',
                   label: 'UNPAID INVOICES',
                   color:AppColors.blackGreen,
                   bgColor: Color(0xFFFFEBEE),
                 ),
                 _StatCard(
-                  icon: Icons.calendar_today_outlined,
+                  icon: Icons.assignment_turned_in_outlined,
                   amount: '${controller.lowStock.value}',
                   label: 'LOW STOCK',
                   color:AppColors.blackGreen,
@@ -176,18 +192,19 @@ class DashboardScreen extends GetView<DashboardController> {
                         children: [
                           Text(
                             'Total Orders',
-                            style: TextStyle(
+                            style: GoogleFonts.montserrat(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF212121),
+                              color: Colors.black
                             ),
                           ),
                           SizedBox(height: 4.h),
                           Text(
                             'Last 12 Months Performance',
-                            style: TextStyle(
+                            style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
-                              color: Color(0xFF9E9E9E),
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF3E5E7D),
                             ),
                           ),
                         ],
@@ -195,7 +212,7 @@ class DashboardScreen extends GetView<DashboardController> {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                         decoration: BoxDecoration(
-                          color: Color(0xFFF5F5F5),
+                          color: Colors.transparent,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
@@ -203,7 +220,7 @@ class DashboardScreen extends GetView<DashboardController> {
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF757575),
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -235,63 +252,70 @@ class DashboardScreen extends GetView<DashboardController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Order Distribution',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF212121),
-                    ),
-                  ),
-                  SizedBox(height: 20.h),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // Dynamic Donut Chart
-                      Obx(
-                            () => Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            SizedBox(
-                              width: 120.w,
-                              height: 120.w,
-                              child: _DonutChart(
-                                activePercentage: controller.activePercentage.value,
+                      Expanded(
+                        flex: 6,
+                        child: Obx(
+                              () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Order Distribution',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14.sp,
+                                  fontWeight:FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+
                               ),
-                            ),
-                            Text(
-                              '${controller.activeOrders.value}',
-                              style: TextStyle(
-                                fontSize: 28.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF212121),
+                              SizedBox(height: 20.h),
+                              // Completed first (22% - Blue)
+                              _LegendItem(
+                                color: Color(0xFF42A5F5),
+                                label: 'Completed',
+                                value: controller.completedOrders.value,
+                                percentage: controller.completedPercentage.value,
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 16.h),
+                              // Active second (78% - Green)
+                              _LegendItem(
+                                color: Color(0xFF66BB6A),
+                                label: 'Active',
+                                value: controller.activeOrders.value,
+                                percentage: controller.activePercentage.value,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      // Legend - SWAP ORDER
-                      Obx(
-                            () => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Completed first (22% - Blue)
-                            _LegendItem(
-                              color: Color(0xFF42A5F5),
-                              label: 'Completed',
-                              value: controller.completedOrders.value,
-                              percentage: controller.completedPercentage.value,
-                            ),
-                            SizedBox(height: 16.h),
-                            // Active second (78% - Green)
-                            _LegendItem(
-                              color: Color(0xFF66BB6A),
-                              label: 'Active',
-                              value: controller.activeOrders.value,
-                              percentage: controller.activePercentage.value,
-                            ),
-                          ],
+                      // Dynamic Donut Chart
+                      Expanded(
+                        flex: 3,
+                        child: Obx(
+                              () => Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SizedBox(
+                                width: 120.w,
+                                height: 120.w,
+                                child: _DonutChart(
+                                  activePercentage: controller.activePercentage.value,
+                                ),
+                              ),
+                              Text(
+                                '${controller.activeOrders.value}',
+                                style: TextStyle(
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF212121),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -311,10 +335,10 @@ class DashboardScreen extends GetView<DashboardController> {
                   children: [
                     Text(
                       'Recent Activity',
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF212121),
+                        color: Colors.black,
                       ),
                     ),
                     Text(
@@ -329,17 +353,17 @@ class DashboardScreen extends GetView<DashboardController> {
                 ),
                 SizedBox(height: 16.h),
                 _ActivityItem(
-                  icon: Icons.person_add,
+                  icon: Icons.person_add_alt_outlined,
                   title: 'New Subscriber',
                   time: '2 minutes ago',
-                  iconColor: Color(0xFF42A5F5),
+                  iconColor: Color(0xFF2858B2),
                 ),
                 SizedBox(height: 12.h),
                 _ActivityItem(
-                  icon: Icons.inventory_2,
+                  icon: Icons.assignment_turned_in_outlined,
                   title: 'Inventory Restocked',
                   time: '1 hour ago',
-                  iconColor: Color(0xFF66BB6A),
+                  iconColor: Color(0xFF006573),
                 ),
               ],
             ),
@@ -424,10 +448,10 @@ class _ScrollableChartState extends State<_ScrollableChart> {
                     SizedBox(height: 12.h),
                     Text(
                       months[index],
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
                         fontSize: 11.sp,
-                        color: Color(0xFF757575),
-                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF3E5E7D),
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -460,11 +484,10 @@ class _StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: color.withValues(alpha:0.2), width: 1),
+        borderRadius: BorderRadius.circular(32.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -484,8 +507,8 @@ class _StatCard extends StatelessWidget {
             children: [
               Text(
                 amount,
-                style: TextStyle(
-                  fontSize: 22.sp,
+                style: GoogleFonts.montserrat(
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
                   color: color,
                 ),
@@ -493,12 +516,12 @@ class _StatCard extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 11.sp,
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.sp,
                   color: AppColors.green,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.3,
-                ),
+              ),
               ),
             ],
           ),
@@ -624,25 +647,21 @@ class _LegendItem extends StatelessWidget {
             SizedBox(width: 8.w),
             Text(
               label,
-              style: TextStyle(
-                fontSize: 13.sp,
-                color: Color(0xFF757575),
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                color: color,
+                fontWeight: FontWeight.w600,
               ),
             ),
+            Text(
+              '  ($percentage%)',
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                color: color,
+                fontWeight: FontWeight.w600,
+              ),
+            )
           ],
-        ),
-        SizedBox(height: 6.h),
-        Padding(
-          padding: EdgeInsets.only(left: 20.w),
-          child: Text(
-            '$value ($percentage%)',
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Color(0xFF9E9E9E),
-              fontWeight: FontWeight.w400,
-            ),
-          ),
         ),
       ],
     );
@@ -684,7 +703,7 @@ class _ActivityItem extends StatelessWidget {
                 width: 44.w,
                 height: 44.w,
                 decoration: BoxDecoration(
-                  color: iconColor.withValues(alpha:0.1),
+                  color: iconColor.withValues(alpha:0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: iconColor, size: 20.sp),
@@ -695,18 +714,18 @@ class _ActivityItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF212121),
+                      color: Colors.black,
                     ),
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     time,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 12.sp,
-                      color: Color(0xFF9E9E9E),
+                      color: Colors.black.withValues(alpha: 0.7),
                     ),
                   ),
                 ],

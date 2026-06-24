@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:insta_sign_tracker/core/utils/app_colors.dart';
 import '../../../dashboard_and_user_management/presentation/widget/admin_app_drawer_widget.dart';
 import '../../data/model/warehouse_model.dart';
 import '../controller/warehouses_controller.dart';
@@ -15,7 +17,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
       backgroundColor: const Color(0xFFF0F4FA),
       drawer:  AdminAppDrawerWidget(),
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: AppColors.appBarColor,
         elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
@@ -25,7 +27,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
         ),
         title: Text(
           'Warehouses',
-          style: TextStyle(
+          style: GoogleFonts.montserrat(
             fontSize: 20.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -72,7 +74,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
 
   Widget _buildSearchBar() {
     return Container(
-      color: Colors.lightBlue,
+      color:AppColors.appBarColor,
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
       child: CustomTextField(
         controller: TextEditingController(),
@@ -95,7 +97,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
               children: [
                 TextSpan(
                   text: 'Total ',
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -104,7 +106,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
                 TextSpan(
                   text:
                   '(${controller.warehouses.length.toString().padLeft(2, '0')})',
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.lightBlue,
@@ -117,7 +119,7 @@ class WarehousesScreen extends GetView<WarehousesController> {
             onPressed: controller.openAddDialog,
             label: Text(
               '+ Add Warehouse',
-              style: TextStyle(
+              style: GoogleFonts.montserrat(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -155,7 +157,8 @@ class WarehousesScreen extends GetView<WarehousesController> {
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(24.r),
+          border: Border.all(width: 0.2,color: Colors.grey),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),
@@ -170,13 +173,14 @@ class WarehousesScreen extends GetView<WarehousesController> {
               width: 44.w,
               height: 44.w,
               decoration: BoxDecoration(
-                color: Colors.lightBlue.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(10.r),
+                color: Color(0xFFE8F2FF),
+                borderRadius: BorderRadius.circular(32.r),
               ),
               child: Icon(
                 Icons.store_outlined,
-                color: Colors.lightBlue,
-                size: 22.sp,
+                color:Color(0xFF00628B),
+                size: 24.sp,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(width: 12.w),
@@ -186,8 +190,8 @@ class WarehousesScreen extends GetView<WarehousesController> {
                 children: [
                   Text(
                     warehouse.name,
-                    style: TextStyle(
-                      fontSize: 15.sp,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -195,9 +199,9 @@ class WarehousesScreen extends GetView<WarehousesController> {
                   SizedBox(height: 3.h),
                   Text(
                     warehouse.location,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 13.sp,
-                      color: Colors.grey.shade500,
+                      color: Colors.black.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
@@ -213,9 +217,10 @@ class WarehousesScreen extends GetView<WarehousesController> {
   Widget _buildPopupMenu(WarehouseModel warehouse) {
     return PopupMenuButton<String>(
       icon: Icon(Icons.more_vert, color: Colors.grey.shade600, size: 22.sp),
+      padding: EdgeInsets.zero,
       color: Colors.white,
       elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       onSelected: (value) {
         if (value == 'edit') {
           controller.openEditDialog(warehouse);
@@ -224,25 +229,50 @@ class WarehousesScreen extends GetView<WarehousesController> {
         }
       },
       itemBuilder: (_) => [
-        PopupMenuItem(
+        PopupMenuItem<String>(
           value: 'edit',
-          child: Text(
-            'Edit',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.lightBlue,
+          padding: EdgeInsets.zero,
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 10.h,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.appBarColor,
+              borderRadius: BorderRadius.circular(0.r),
+            ),
+            child: Text(
+              'Edit',
+              style: GoogleFonts.montserrat(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
-        PopupMenuItem(
+
+        PopupMenuItem<String>(
           value: 'delete',
-          child: Text(
-            'Delete',
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.red,
+          padding: EdgeInsets.zero,
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 10.h,
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xFFFFF4E6),
+              borderRadius: BorderRadius.circular(0.r),
+            ),
+            child: Text(
+              'Delete',
+              style: GoogleFonts.montserrat(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w700,
+                color: Colors.red,
+              ),
             ),
           ),
         ),

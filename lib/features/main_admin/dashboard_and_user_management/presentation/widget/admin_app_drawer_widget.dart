@@ -153,6 +153,11 @@ class _AdminAppDrawerWidgetState extends State<AdminAppDrawerWidget> {
           onTap: () {},
         ),
         _buildMenuItem(
+          icon: Icons.print,
+          label: 'Printing',
+          onTap: () => _navigateToPage(AppRoutes.adminPrintingScreen),
+        ),
+        _buildMenuItem(
           icon: Icons.warehouse_outlined,
           label: 'Manage Warehouse',
           onTap: () => _navigateToPage(AppRoutes.warehousesScreen),
@@ -160,12 +165,12 @@ class _AdminAppDrawerWidgetState extends State<AdminAppDrawerWidget> {
         _buildMenuItem(
           icon: Icons.admin_panel_settings_outlined,
           label: 'Make Admin',
-          onTap: () {},
+          onTap: () => _navigateToPage(AppRoutes.makeAdminScreen),
         ),
         _buildMenuItem(
           icon: Icons.notifications_outlined,
           label: 'Announcements',
-          onTap: () {},
+          onTap: () => _navigateToPage(AppRoutes.adminAnnouncementsScreen),
         ),
         _buildMenuItem(
           icon: Icons.settings_outlined,
