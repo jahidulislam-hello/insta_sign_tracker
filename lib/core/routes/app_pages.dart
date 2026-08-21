@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:insta_sign_tracker/features/main_admin/agents/screens/agents_screen.dart';
+import 'package:insta_sign_tracker/features/main_admin/assistnats/screens/assistants_screen.dart';
 import '../../features/Authentication/presentation/screen/enter_email_screen.dart';
 import '../../features/Authentication/presentation/screen/login_screen.dart';
 import '../../features/Authentication/presentation/screen/otp_verify_screen.dart';
@@ -211,6 +213,14 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.adminAnnouncementsScreen,
       page: () => AdminAnnouncementsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.agentsScreen,
+      page: () => AgentsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.assistantsScreen,
+      page: () => AssistantsScreen(),
     ),
   ];
 }

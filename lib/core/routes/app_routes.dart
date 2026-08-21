@@ -50,5 +50,7 @@ abstract class AppRoutes {
   static const String makeAdminScreen = '/makeAdminScreen';
   static const String adminPrintingScreen = '/adminPrintingScreen';
   static const String adminAnnouncementsScreen = '/adminAnnouncementsScreen';
+  static const String agentsScreen = '/agentsScreen';
+  static const String assistantsScreen = '/assistantsScreen';
 
 }

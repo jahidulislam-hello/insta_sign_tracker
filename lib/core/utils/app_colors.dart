@@ -37,6 +37,67 @@ class AppColors {
   static const Color blackGreen = Color(0xFF004D3C);
   static const Color green = Color(0xFF007A5E);
 
+  static const Color background = Color(0xFFF7F8FA);
+  static const Color surface = Colors.white;
+
+  static const Color textPrimary = Color(0xFF14161A);
+  static const Color textSecondary = Color(0xFF6B7280);
+  static const Color textMuted = Color(0xFF9CA3AF);
+
+  static const Color border = Color(0xFFE5E7EB);
+  static const Color fieldFill = Color(0xFFF1F2F4);
+
+  static const Color blue = Color(0xFF2E86F0);
+  static const Color blueLight = Color(0xFFEAF3FE);
+
+  static const Color redLight = Color(0xFFFDECEC);
+  static const Color pink = Color(0xFFEF9A9A);
+
+  static const Color greenLight = Color(0xFFE9F8EF);
+
+  static const Color orangeLight = Color(0xFFFEF3E2);
+
+  static const Color blueBadgeBg = Color(0xFFDCEAFE);
+
+  static const Color chipBlack = Color(0xFF14161A);
+
+  static const double radiusSm = 8;
+  static const double radiusMd = 10;
+  static const double radiusLg = 14;
+}
+
+class AppText {
+  AppText._();
+
+  static const TextStyle h1 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w800,
+    color: AppColors.textPrimary,
+  );
+
+  static const TextStyle sectionLabel = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textSecondary,
+    letterSpacing: 0.4,
+  );
+
+  static const TextStyle body = TextStyle(
+    fontSize: 13,
+    color: AppColors.textPrimary,
+  );
+
+  static const TextStyle bodyMuted = TextStyle(
+    fontSize: 12,
+    color: AppColors.textSecondary,
+  );
+
+  static const TextStyle fieldLabel = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+  );
+
 
 
 }

@@ -13,6 +13,7 @@ class AdminAppDrawerWidget extends StatefulWidget {
 
 class _AdminAppDrawerWidgetState extends State<AdminAppDrawerWidget> {
   bool _isUserManagementExpanded = false;
+  bool _isItemPricingExpanded = false;
 
   // ===== NAVIGATION FUNCTION =====
   void _navigateToPage(String route) {
@@ -121,9 +122,9 @@ class _AdminAppDrawerWidgetState extends State<AdminAppDrawerWidget> {
           },
         ),
         if (_isUserManagementExpanded)
-          _buildDropdownItem(label: 'Agents', onTap: () {}),
+          _buildDropdownItem(label: 'Agents', onTap: () => _navigateToPage(AppRoutes.agentsScreen),),
         if (_isUserManagementExpanded)
-          _buildDropdownItem(label: 'Assistants', onTap: () {}),
+          _buildDropdownItem(label: 'Assistants', onTap: () => _navigateToPage(AppRoutes.assistantsScreen)),
         if (_isUserManagementExpanded)
           _buildDropdownItem(label: 'Field Technicians', onTap: () {}),
         if (_isUserManagementExpanded)
@@ -147,11 +148,36 @@ class _AdminAppDrawerWidgetState extends State<AdminAppDrawerWidget> {
           label: 'Routing',
           onTap: () {},
         ),
-        _buildMenuItem(
+        _buildMenuItemWithDropdown(
           icon: Icons.local_offer_outlined,
           label: 'Items & Pricing',
-          onTap: () {},
+          isExpanded: _isItemPricingExpanded,
+          onTap: () {
+            setState(() {
+              _isItemPricingExpanded = !_isItemPricingExpanded;
+            });
+          },
         ),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Categories', onTap: () => _navigateToPage(AppRoutes.agentsScreen),),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Variants', onTap: () => _navigateToPage(AppRoutes.assistantsScreen)),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Add-on Services', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Installer Charge', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Trip Charge', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'packages', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Discounts', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Coupons', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Service Categories', onTap: () {}),
+        if (_isItemPricingExpanded)
+          _buildDropdownItem(label: 'Services', onTap: () {}),
         _buildMenuItem(
           icon: Icons.print,
           label: 'Printing',
