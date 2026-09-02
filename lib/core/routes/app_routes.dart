@@ -50,7 +50,68 @@ abstract class AppRoutes {
   static const String makeAdminScreen = '/makeAdminScreen';
   static const String adminPrintingScreen = '/adminPrintingScreen';
   static const String adminAnnouncementsScreen = '/adminAnnouncementsScreen';
+
+
+  //------------------------Settings Screen------------------------------------------
+  static const String scedulMethod = '/scedulMethod';
+  static const String entryMethod = '/entryMethod';
+  static const String photographer = '/photographer';
+  static const String invoicing = '/invoicing';
+  static const String taskbuilder = '/taskbuilder';
+  static const String companyInformation = '/companyInformation';
+  static const String autoRenewal = '/autoRenewal';
+  static const String announcement = '/announcement';
+  static const String brokerage = '/brokerage';
+  static const String makeAdmin = '/makeAdmin';
+
+  //------------------------Printing------------------------------------------
+  static const String deliveryMethods = '/deliveryMethods';
+  static const String materialsScreen = '/materialsScreen';
+  static const String optionsScreen = '/optionsScreen';
+  static const String sizesScreen = '/sizesScreen';
+  static const String sizesTypeScreen = '/sizesTypeScreen';
+
+
+  //------------------------Media------------------------------------------
+  static const String calenderView = '/calenderView';
+  static const String mediaDelivery = '/mediaDelivery';
+  static const String taskManager = '/taskManager';
+  static const String workingsDay = '/workingsDay';
+
+  //------------------------Invoices------------------------------------------
+  static const String client = '/client';
+  static const String technician = '/technician';
+
+
+  //------------------------Items & Pricing------------------------------------------
+  static const String categories = '/categories';
+  static const String variants = '/variants';
+  static const String addServices = '/addServices';
+  static const String installerCharge = '/installerCharge';
+  static const String tripCharge = '/tripCharge';
+  static const String packages = '/packages';
+  static const String discounts = '/discounts';
+  static const String coupons = '/coupons';
+  static const String serviceCategories = '/serviceCategories';
+  static const String services = '/services';
+
+
+  //------------------------Users Management------------------------------------------
   static const String agentsScreen = '/agentsScreen';
   static const String assistantsScreen = '/assistantsScreen';
+  static const String fieldTechnicians = '/fieldTechnicians';
+  static const String officeManager = '/officeManager';
+  static const String wareHouseManager = '/wareHouseManager';
+  static const String approvals = '/approvals';
+  static const String inventoryManagement = '/inventoryManagement';
+
+
+
+  static const String orderManagement = '/orderManagement';
+  static const String disPatchBoard = '/disPatchBoard';
+  static const String procurement = '/procurement';
+  static const String revenue = '/revenue';
+  static const String routing = '/roting';
+
 
 }

@@ -28,6 +28,7 @@ class AuthController extends GetxController {
 
     try {
       Logger().i("sing up successfully.");
+      Get.offAllNamed(AppRoutes.dashboardScreen);
     } catch (e) {
       Logger().i("sing up fail.");
     } finally {
@@ -55,6 +56,7 @@ class AuthController extends GetxController {
 
     try {
       Logger().i("login successfully.");
+      Get.offAllNamed(AppRoutes.dashboardScreen);
     } catch (e) {
       Logger().i("login fail.");
     } finally {
